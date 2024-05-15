@@ -1,4 +1,5 @@
 ## Base de dades edx – col·lecció students
+
 1. Busca els estudiants de gènere masculí
    ```js
    db.students.find({gender:"H"})
@@ -91,3 +92,36 @@
     ```js
     db.students.find({name:/[AEIOUaeiou]{3}/})
     ```
+
+
+## Base de dades edx – col·lecció bios
+
+24. Busca aquells desenvolupadors que han realitzat contribucions en OOP
+    ```js
+    db.bios.find({contribs:{$in:["OOP"]}})
+    ```
+25. Busca aquells desenvolupadors que han realitzat contribucions en OOP o Java
+    ```js
+    db.bios.find({contribs:{$in:["OOP","Java"]}})
+    ```
+26. Busca aquells desenvolupadors que han realitzat contribucions en OOP i Simula
+    ```js
+    db.bios.find({contribs:{$all:["OOP","Simula"]}})
+    ```
+27. Busca aquells desenvolupadors que siguin vius
+    ```js
+    db.bios.find({deathYear:{$exists:false}})
+    ```
+28. Busca aquells desenvolupadors que siguin morts
+    ```js
+    db.bios.find({deathYear:{$exists:true}})
+    ```
+29. Busca aquells desenvolupadors que han obtingut un premi a l’any 2002
+    ```js
+    db.bios.find({awards:{$elemMatch:{"year":{$eq:2002}}}})
+    ```
+30. Busca aquells desenvolupadors que han obtingut exactament 3 premis.
+    ```js
+    db.bios.find({awards:{$size:3}})
+    ```
+

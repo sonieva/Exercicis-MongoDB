@@ -45,7 +45,7 @@
     ``` 
 12. Recupera els empleats que tenen pct_comissio i hagi treballat o treballin actualment de "Cap de Vendes" . Utilitza el codi de feina "SA_MAN".
     ```js 
-    db.empleats.find({$and: [{pct_comissio: {$exists:true}},{$or:[{historial_feines: {$elemMatch: {"feina.codi": "Cap de Vendes"}}},{"feina.nom": "Cap de Vendes"}]}]})
+    db.empleats.find({$and: [{pct_comissio: {$exists:true}},{$or:[{historial_feines: {$elemMatch: {"feina.codi": "SA_MAN"}}}]}]})
     ```
 13. Recupera els empleats que han tingut 2 feines. No tinguis en compte la feina actual.
     ```js
