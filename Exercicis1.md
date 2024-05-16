@@ -74,7 +74,7 @@
     ```
 19. Busca els estudiants que el seu dni comenci i acabi amb una lletra
     ```js
-    
+    db.students.find({dni:/^[A-Z].+[A-Z]$/})
     ```
 20. Busca els estudiants que el seu nom comenci per una vocal
     ```js
@@ -125,3 +125,44 @@
     db.bios.find({awards:{$size:3}})
     ```
 
+
+## Base de dades imdb – col·lecció people
+31. Buscar les persones que només han actuat. No han dirigit
+    ```js
+    db.people.find({hasActed:true,hasDirected:{$exists:false}})
+    ```
+32. Busca les persones que només an dirigit. No han actuat
+    ```js
+    db.people.find({hasDirected:true,hasActed:{$exists:false}})
+    ```
+33. Buscar les persones que han actuat i dirigit
+    ```js
+    db.people.find({hasActed:true,hasDirected:true})
+    ```
+34. Buscar les persones que ni han actuat ni dirigit.
+    ```js
+    db.people.find({hasActed:false,hasDirected:false})
+    ```
+35. Buscar les pel·lícules protagonitzades per Penelope Cruz
+    ```js
+    db.movies.find({actors:{$elemMatch:{name:"Penelope Cruz"}}})
+    ```
+
+
+## Base de dades edx – col·lecció books
+36. Buscar aquells llibres que han estat escrits per Martin Fowloer i Kent Beck
+    ```js
+    db.books.find({author:{$all:["Martin Fowloer","Kent Beck"]}})
+    ```
+37. Buscar els llibres que tinguin el tag ‘programming’ i ‘agile’
+    ```js
+    db.books.find({tags:{$all:["programming","agile"]}})
+    ```
+38. Buscar els llibres amb el tag ‘html’, ‘html5’, ‘css’ o ‘css3’
+    ```js
+    db.books.find({tags:{$in:["html","html5","css","css3"]}})
+    ```
+39. Buscar els llibres que no tinguin el tag ‘html’, ‘html5’, ‘css’ o ‘css3’
+    ```js
+    db.books.find({tags:{$nin:["html","html5","css","css3"]}})
+    ```
