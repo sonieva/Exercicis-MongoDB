@@ -14,7 +14,7 @@
    ```
 4. Busca els estudiants de gènere masculí i nascuts l’any 1993
    ```js
-   db.students.find({$and:[{birth_year:1993},{gender:"H"}]})
+   db.students.find({birth_year:1993,gender:"H"})
    ```
 5. Busca els estudiants nascuts després de l’any 1990
    ```js
@@ -22,7 +22,7 @@
    ```
 6. Busca els estudiants nascuts abans o durant l’any 1990
    ```js
-   db.students.find({birth_year:{$gte:1990}})
+   db.students.find({birth_year:{$lte:1990}})
    ```
 7. Busca els estudiants nascuts a la dècada dels 90s
    ```js
@@ -30,7 +30,7 @@
    ```
 8.  Busca els estudiants de gènere femani nascus a la dècada dels 90s
     ```js
-    db.students.find({$and:[{birth_year:{$gte:1990, $lte:1999}},{gender:"M"}]})
+    db.students.find({birth_year:{$gte:1990, $lte:1999},gender:"M"})
     ```
 9.  Busca els estudiants que no han nascut a l’any 1985
     ```js
@@ -62,11 +62,11 @@
     ```
 16. Busca els estudiants que tinguin telèfon auxiliar i només el primer cognom
     ```js
-    db.students.find({$and:[{lastname2:{$exists:false}},{phone_aux:{$exists:true}}]})
+    db.students.find({lastname2:{$exists:false},phone_aux:{$exists:true}})
     ```
 17. Busca els estudiants que el seu correu electrònic acabi en .net
     ```js
-    db.students.find({email:/.net$/})
+    db.students.find({email:/\.net$/})
     ```
 18. Busca els estudiants que el seu telèfon comenci per 622
     ```js
@@ -74,11 +74,11 @@
     ```
 19. Busca els estudiants que el seu dni comenci i acabi amb una lletra
     ```js
-    db.students.find({dni:/^[A-Z].+[A-Z]$/})
+    db.students.find({dni:/^[a-z].*[a-z]$/i})
     ```
 20. Busca els estudiants que el seu nom comenci per una vocal
     ```js
-    db.students.find({name:/^[AEIOU]/})
+    db.students.find({name:/^[aeiou]/i})
     ```
 21. Busca els estudiants que el seu nom sigui compost
     ```js
@@ -87,10 +87,11 @@
 22. Busca els estudiants amb un nom més llarg de 13 caràcters
     ```js
     db.students.find({$expr:{$gt:[{$strLenCP:"$name"},13]}})
+    db.students.find({$where: "(this.name.length > 13)"})
     ```
 23. Busca els estudiants amb 3 o més vocals en el seu nom
     ```js
-    db.students.find({name:/[AEIOUaeiou]{3}/})
+    db.students.find({name:/[aeiouáàèéíìòóú]{3,}/i})
     ```
 
 
